@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charlizon Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+        <div class="logo">
+            <img src="img/logo.png" alt="Logo">
+            <span>Charlizon</span>
+        </div>
+
+        <button class="toggle-menu" id="toggle-menu">&#9776;</button>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+            <li>
+                <a href="#carrito" class="carrito-link">
+                    <img src="img/carrito.png" alt="Carrito" class="icono-carrito">
+                    <span id="contador-carrito">0</span>
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="contenido-hero">
+        <h1>Bienvenidos a Tienda Elegante</h1>
+        <p>Misión: Ofrecer productos de alta calidad con atención personalizada.</p>
+        <p>Visión: Ser la marca líder en artículos de lujo y exclusividad.</p>
+        </div>
+    </section>
+
+    <section id="productos" class="productos">
+        <h2>Nuestros Productos</h2>
+        <div class="galeria">
+            <div class="producto">
+                <img src="img/1.jpg" alt="Producto 1">
+                <h3>Nébula</h3>
+                <p>$6500.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/2.jpg" alt="Producto 2">
+                <h3>Aura</h3>
+                <p>$7300.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/3.jpg" alt="Producto 2">
+                <h3>Éter</h3>
+                <p>$5800.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/4.jpg" alt="Producto 2">
+                <h3>Silencio Porcelana</h3>
+                <p>$6200.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/5.jpg" alt="Producto 2">
+                <h3>Pixel</h3>
+                <p>$8900.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/6.jpg" alt="Producto 2">
+                <h3>Vortex</h3>
+                <p>$9100.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/7.jpg" alt="Producto 2">
+                <h3>Luna Negra</h3>
+                <p>$5300.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/8.jpg" alt="Producto 2">
+                <h3>Cápsula de Luz</h3>
+                <p>$7400.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/f1.jpg"Producto 2">
+                <h3>Rosa Ácida</h3>
+                <p>$4650.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/f2.jpg" alt="Producto 2">
+                <h3>Selva</h3>
+                <p>$11050.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="img/f3.jpg" alt="Producto 2">
+                <h3>Aurora</h3>
+                <p>$5600.00</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <!-- Agregá más productos si querés -->
+        </div>
+    </section>
+
+
+    <section id="sobre-nosotros" class="sobre-nosotros">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos una tienda dedicada a ofrecer mecetas impresas en 3D, nuestros modelos son únicos y estan realizados para personas que aprecian la calidad y el detalle. Nuestro equipo está comprometido con brindar la mejor experiencia de compra y tambien con darle un toque de dinamismo a tu decoracion y a tus plantas.</p>
+    </section>
+
+    <section id="carrito" class="carrito">
+        <h2>Tu Carrito</h2>
+        <div id="contenido-carrito"></div>
+        <p id="total">Total: $0.00</p>
+        <button id="vaciar-carrito">Vaciar Carrito</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Charlizon Store. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleMenu = document.getElementById('toggle-menu');
+            const navLinks = document.getElementById('nav-links');
+            const botonesComprar = document.querySelectorAll('.btn-comprar');
+            const contenidoCarrito = document.getElementById('contenido-carrito');
+            const contadorCarrito = document.getElementById('contador-carrito');
+            const totalTexto = document.getElementById('total');
+            const vaciarBtn = document.getElementById('vaciar-carrito');
+
+            // Mostrar/ocultar menú en responsive
+            toggleMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('show');
+            });
+
+            // Carrito en memoria
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // Función para actualizar el carrito en pantalla
+            function renderizarCarrito() {
+                contenidoCarrito.innerHTML = '';
+                let total = 0;
+
+                carrito.forEach((producto, index) => {
+                    const item = document.createElement('div');
+                    item.classList.add('carrito-item');
+                    item.innerHTML = `
+                        <span>${producto.nombre}</span>
+                        <span>${producto.precio}</span>
+                    `;
+                    contenidoCarrito.appendChild(item);
+
+                    // Sumar total
+                    total += parseFloat(producto.precio.replace('$', ''));
+                });
+
+                // Mostrar total y contador
+                totalTexto.textContent = `Total: $${total.toFixed(2)}`;
+                contadorCarrito.textContent = carrito.length;
+
+                // Guardar en localStorage
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+            }
+
+            // Agregar producto al carrito
+            botonesComprar.forEach((boton) => {
+                boton.addEventListener('click', () => {
+                    const producto = boton.parentElement;
+                    const nombre = producto.querySelector('h3').innerText;
+                    const precio = producto.querySelector('p').innerText;
+
+                    carrito.push({ nombre, precio });
+                    renderizarCarrito();
+                });
+            });
+
+            // Vaciar carrito
+            vaciarBtn.addEventListener('click', () => {
+                carrito = [];
+                renderizarCarrito();
+            });
+
+            // Mostrar el carrito guardado al cargar la página
+            renderizarCarrito();
+        });
+    </script>
+
+
+</body>
+</html>
