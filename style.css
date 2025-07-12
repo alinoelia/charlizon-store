@@ -96,13 +96,14 @@ body {
 }
 
 .hero h1 {
-    font-size: 48px;
+    font-family: "Emilys Candy", serif;
+    font-size: 60px;
     margin-bottom: 20px;
     text-shadow: 2px 2px #000;
 }
 
 .hero p {
-    font-size: 20px;
+    font-size: 25px;
     max-width: 600px;
     margin: 0 auto;
     text-shadow: 1px 1px #000;
@@ -190,16 +191,24 @@ body {
 }
 
 .carrito {
-    padding: 60px 20px;
-    background-color: #f8f8f8;
+    padding: 60px 300px;
+    background-color: #0077b6;
     text-align: center;
-    color: #000;
+    color: #1c1c1c;
 }
 
+.carrito h2 {
+    margin-bottom:25px;
+}
 .carrito ul {
     list-style: none;
     padding: 0;
     margin-top: 20px;
+}
+
+.carrito #total {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .carrito li {
@@ -229,7 +238,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    background: #caf0f8;
     color: #000;
     padding: 10px;
     margin-bottom: 10px;
